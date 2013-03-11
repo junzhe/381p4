@@ -1,5 +1,10 @@
 #include "Geometry.h"
-
+#include "Track_base.h"
+#include "Utility.h"
+#include "Island.h"
+#include "Navigation.h"
+#include <iostream>
+using namespace std;
 /*
 Define the destructor function even if it was declared as a pure virtual function.
 This seems odd, because pure virtual functions are usually not defined in the class
