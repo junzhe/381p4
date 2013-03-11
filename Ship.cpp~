@@ -265,7 +265,7 @@ void Ship::dock(Island * island_ptr){
   }
   
   if(!can_dock(island_ptr)){
-    throw Error("Can't dock!");
+    throw rror("Can't dock!");
   }
   
   ship_state = DOCKED;
