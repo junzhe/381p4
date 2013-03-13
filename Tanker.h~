@@ -23,7 +23,7 @@ typedef enum{
   MOVING_TO_UNLOADING
 } Tanker_state;
 
-class Tanker : public Ship{
+class Tank : public Ship{
 public:
 	// initialize, the output constructor message
 	Tanker(const std::string& name_, Point position_);

@@ -107,8 +107,9 @@ protected:
 	// future projects may need additional protected members
 	double fuel_capacity;
 	int resistance;
-	Ship_state ship_state;
-
+	Point get_position() const{return get_position();}
+	Ship_state get_ship_state() const {return ship_state;}
+	void set_ship_state(Ship_state ship_state_){ship_state = ship_state_;}
 	double get_maximum_speed() const;
 	// return pointer to the Island currently docked at, or nullptr if not docked
 	Island* get_docked_Island() const;
@@ -119,7 +120,8 @@ private:
 	Point destination;					// Current destination if any
         double maximum_speed;
 	Island* island_docked;
-
+	Ship_state ship_state;
+		
 	// Updates position, fuel, and movement_state, assuming 1 time unit (1 hr)
 	void calculate_movement();
 

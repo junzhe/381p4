@@ -167,12 +167,11 @@ void Tanker::update(){
       }
       break;
     }
-    case MOVING_TO_UNLOADING:{
+    case MOVING_TO_UNLOADING:
       if(!is_moving()){
 	set_ship_state(DOCKED);
 	tanker_state = UNLOADING;
       }
       break;
-    }
   }
 }
