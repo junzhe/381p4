@@ -74,11 +74,8 @@ public:
 private:
 	int time;		// the simulated time
 
+
 	// disallow copy/move construction or assignment
-	Model(const Model&) = delete;
-	Model(Model&&) = delete;
-	Model& operator=(const Model&) = delete;
-	Model& operator=(Model&&) = delete;
 };
 
 #endif
