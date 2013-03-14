@@ -2,6 +2,7 @@
 #define MODLE_H
 
 #include <set>
+#include "Utility.h"
 
 /*
 Model is part of a simplified Model-View-Controller pattern.
@@ -77,9 +78,11 @@ public:
 private:
 	int time;		// the simulated time
 	
-	set<Sim_object*> sim_object_set;
-	set<Island*> island_set;
-	set<Ship*> ship_set;
+	set<Sim_object*, Sim_object_Compare> sim_object_set;
+	set<Island*, Sim_object_Compare> island_set;
+	set<Ship*, Sim_object_Compare> ship_set;
+	set<View*> view_set;
+	
 	// disallow copy/move construction or assignment
 	Model(const Model&) = delete;
 	Model(Model&&) = delete;

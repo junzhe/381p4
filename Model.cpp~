@@ -88,14 +88,7 @@ void Model::update(){
   time++;
   for_each(sim_object_set.begin(), sim_object_set.end(), [](Sim_object* object){ object->update();});
   
-  vector<Ship*> ship_remove;
-  for_each(ship_set.begin(), ship_set.end(), [&ship_move](Ship* ship){if(ship->is_on_the_bottom()){ship_move.push_back(ship);});
   
-  for(Ship* ship:ship_remove){
-    sim_object_set.erase(ship);
-    ship_set.erase(ship);
-    delete ship;
-  }
 }
 
 void Model::attach(View* view_ptr){
