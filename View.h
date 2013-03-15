@@ -1,3 +1,8 @@
+#ifndef VIEW_H
+#define VIEW_H
+#include <vector>
+#include <string>
+#include <map>
 /* *** View class ***
 The View class encapsulates the data and functions needed to generate the map
 display, and control its properties. It has a "memory" for the names and locations
@@ -18,14 +23,8 @@ with the appropriate functions. Since the view "remembers" the previously update
 information, the draw function will print out a map showing the previous objects
 using the new settings.
 */
-
-/* 
-*** This skeleton file shows the required public and protected interface for the class, which you may not modify. 
-If no protected members are shown, there must be none in your version. 
-If any protected or private members are shown here, then your class must also have them and use them as intended.
-You should delete this comment.
-*/
-
+typedef map<string, Point> point_map;
+typedef vector<vector<string>> matrix_display;
 
 class View {
 public:
@@ -64,6 +63,8 @@ private:
 	int size;			// current size of the display
 	double scale;		// distance per cell of the display
 	Point origin;		// coordinates of the lower-left-hand corner
+	matrix_display matrix;
+	point_map map;
 				
 	// Calculate the cell subscripts corresponding to the location parameter, using the 
 	// current size, scale, and origin of the display. 
