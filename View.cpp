@@ -111,7 +111,6 @@ void View::draw(){
   xw = sox.str().size()>supperx.str().size()?sox.str().size():supperx.str().size();
   yw = soy.str().size()>suppery.str().size()?soy.str().size():suppery.str().size();
   
-  cout.setf(ios::fixed, ios::floatfield);
   cout.precision(0);
 
   for(int i=size-1;i>=0;i--){
@@ -132,4 +131,5 @@ void View::draw(){
     oy+=(scale*3);
   }
   cout<<endl;
+  cout.precision(2);
 }

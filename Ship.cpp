@@ -131,7 +131,7 @@ void Ship::update(){
 	case MOVING_TO_POSITION:
 	  calculate_movement();
 	  cout << get_name()<< " now at " << get_position()<< endl;
-	  //TODO Model::notify_location();
+	  g_Model_ptr->notify_location(get_name(), get_location());
 	  break;
 	case STOPPED:
 	  cout << get_name()<< " stopped at " << get_position()<< endl;
@@ -154,7 +154,7 @@ void Ship::update(){
 	case SINKING:
 	  ship_state = SUNK;
 	  cout<<get_name()<<"sunk"<<endl;
-	  //TODO Model::notify_gone();
+	  g_Model_ptr->notify_location(get_name(), get_location());
 	  break;
 	case SUNK:
 	  ship_state = ON_THE_BOTTOM;
@@ -207,7 +207,7 @@ void Ship::describe() const{
 
 
 void Ship::broadcast_current_state(){
-  //TODO Model::notify_location();
+  g_Model_ptr->notify_location(get_name(), get_location());
 }
 
 void Ship::set_destination_position_and_speed(Point destination_position, double speed){
@@ -313,4 +313,10 @@ void Ship::receive_hit(int hit_force, Ship* attacker_ptr){
   return;
 }
 
+Island* Ship::get_docked_Island() const{
+  return island_docked;
+}
 
+double Ship::get_maximum_speed() const{
+  return maximum_speed;
+}

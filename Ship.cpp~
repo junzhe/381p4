@@ -207,7 +207,7 @@ void Ship::describe() const{
 
 
 void Ship::broadcast_current_state(){
-  //TODO Model::notify_location();
+  g_Model_ptr->notify_location(get_name(), get_location());
 }
 
 void Ship::set_destination_position_and_speed(Point destination_position, double speed){
@@ -265,7 +265,7 @@ void Ship::dock(Island * island_ptr){
   }
   
   if(!can_dock(island_ptr)){
-    throw rror("Can't dock!");
+    throw Error("Can't dock!");
   }
   
   ship_state = DOCKED;
@@ -313,4 +313,10 @@ void Ship::receive_hit(int hit_force, Ship* attacker_ptr){
   return;
 }
 
+Island* Ship::get_docked_Island() const{
+  return island_docked;
+}
 
+double Ship::get_maximum_speed() const{
+  return maximum_speed;
+}

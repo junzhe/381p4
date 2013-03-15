@@ -41,7 +41,7 @@ public:
 	
 	/*** Readers ***/
 	// return the current position
-	Point get_location() const override {return Track_base::get_position();}
+	Point get_location() const override {return get_position();}
 	
 	// Return true if ship can move (it is not dead in the water or in the process or sinking); 
 	bool can_move() const;

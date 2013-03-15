@@ -5,7 +5,8 @@ using std::cout;
 using std::endl;
 
 Tanker::Tanker(const std::string& name_, Point position_)
-:Ship(name_,position_,100,10,2,0)
+:Ship(name_,position_,100,10,2,0),
+tanker_state(NO_CARGO_DESTINATIONS)
 {
   cout << "Tanker " << get_name() << " constructed" << endl;
 }
