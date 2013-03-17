@@ -15,6 +15,7 @@ Cruiser::~Cruiser(){
 }
 
 void Cruiser::update(){
+  Warship::update();
   if(!is_attacking()){
     return;
   }
@@ -23,6 +24,7 @@ void Cruiser::update(){
     fire_at_target();
   }else{
     cout << get_name() << " target is out of range" << endl;
+    stop_attack();
   }
 }
 
@@ -33,5 +35,5 @@ void Cruiser::describe() const{
 
 void Cruiser::receive_hit(int hit_force, Ship* attacker_ptr){
   Ship::receive_hit(hit_force, attacker_ptr);
-//   Ship::attack(attacker_ptr);
+  Warship::attack(attacker_ptr);
 }

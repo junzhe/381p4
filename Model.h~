@@ -3,6 +3,9 @@
 
 #include <set>
 #include "Utility.h"
+#include "Island.h"
+#include "Ship.h"
+#include "View.h"
 
 /*
 Model is part of a simplified Model-View-Controller pattern.
@@ -81,6 +84,7 @@ private:
 	set<Sim_object*, Sim_object_Compare> sim_object_set;
 	set<Island*, Sim_object_Compare> island_set;
 	set<Ship*, Sim_object_Compare> ship_set;
+	set<View*> view_set;
 	
 	// disallow copy/move construction or assignment
 	Model(const Model&) = delete;

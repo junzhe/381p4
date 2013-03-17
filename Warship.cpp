@@ -1,5 +1,5 @@
 #include "Warship.h"
-#include "Ship.cpp"
+#include "Ship.h"
 #include "Utility.h"
 #include <iostream>
 using std::cout;
@@ -11,6 +11,7 @@ Warship::Warship(const std::string& name_, Point position_, double fuel_capacity
 :Ship(name_, position_, fuel_capacity_, maximum_speed_, fuel_consumption_factor_, resistance_),
 firepower(firepower_),
 maximum_range(maximum_range_),
+warship_state(NOT_ATTACKING),
 target_ptr(nullptr)
 {
   cout << "Warship " << get_name() << " constructed" << endl;
@@ -21,6 +22,7 @@ Warship::~Warship(){
 }
 
 void Warship::update(){
+  Ship::update();
   if(warship_state==NOT_ATTACKING){
     return;
   }

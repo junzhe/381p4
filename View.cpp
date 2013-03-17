@@ -1,7 +1,12 @@
 #include "View.h"
 #include "Geometry.h"
+#include "Utility.h"
+#include <sstream>
 #include <cmath>
 #include <map>
+#include <iostream>
+#include <iomanip>
+using namespace std;
 /* *** Use this function to calculate the subscripts for the cell. */
 
 /* *** This code assumes the specified private member variables. */
@@ -34,7 +39,6 @@ View::View()
 :size(25),
 scale(2.0),
 origin(Point(-10,-10)){
-  matrix.assign(size, Vector(25, ". "));
   cout << "View constructed" << endl;
 }
 
@@ -43,10 +47,10 @@ View::~View(){
 }
 
 void View::update_location(const std::string& name, Point location){
-  map[string] = location;
+  map[name] = location;
 }
 
-void View:update_remove(const std::string& name){
+void View::update_remove(const std::string& name){
   map.erase(name);
 }
 
@@ -71,7 +75,7 @@ void View::set_scale(double scale_){
   scale = scale_;
 }
 
-void set_origin(Point origin_){
+void View::set_origin(Point origin_){
   origin = origin_;
 }
 
@@ -82,15 +86,17 @@ void View::set_defaults(){
 }
 
 void View::draw(){
+  matrix.assign(size, vector<string>(size, ". "));
   vector<pair<string, Point>> out_of_map_points;
   for(auto it = map.begin(); it!=map.end(); it++){
     int x= 0,y= 0;
     if(get_subscripts(x,y,(*it).second)){
-      if(matrix[x][y][0]=='.'&&matrix[x][y][1]==' '){
-	matrix[x][y][0] = (*it).first[0];
-	matrix[x][y][1] = (*it).first[1];
+      if(matrix[y][x][0]=='.'&&matrix[y][x][1]==' '){
+	matrix[y][x][0] = (*it).first[0];
+	matrix[y][x][1] = (*it).first[1];
       }else{
-	matrix[x][y][0] = '*';
+	matrix[y][x][0] = '*';
+	matrix[y][x][1] = ' ';
       }
     }else{
       out_of_map_points.push_back((*it));
@@ -100,8 +106,8 @@ void View::draw(){
   int yw = 0;
   double ox = origin.x;
   double oy = origin.y;
-  double upperx = origin.x*scale*size;
-  double uppery = origin.y*scale*size;
+  double upperx = origin.x+scale*(size-1);
+  double uppery = origin.y+scale*(size-1);
   stringstream sox, soy, supperx, suppery;
   sox<<ox;
   soy<<oy;
@@ -110,25 +116,29 @@ void View::draw(){
   
   xw = sox.str().size()>supperx.str().size()?sox.str().size():supperx.str().size();
   yw = soy.str().size()>suppery.str().size()?soy.str().size():suppery.str().size();
-  
+ 
+  cout<<"Display size: "<<size<<", scale: "<<scale<<", origin: ("<<ox<<", "<<oy<<")"<<endl;
   cout.precision(0);
-
+  
   for(int i=size-1;i>=0;i--){
     cout<<" "<<setw(xw);
     if(i%3==0){
-      cout<<upperx;
-      upperx-=(scale*3);
+      cout<<uppery;
+      uppery-=(scale*3);
+    }else{
+      cout<<" ";
     }
+    cout<<" ";
     for(int j=0;j<size;j++){
       cout<<matrix[i][j];
     }
     cout<<endl;
   }
-  cout<<setw(xw+3)<<oy;
-  oy+=(scale*3);
-  for(int i=0;i<(size-1)/3+1;i++){
-    cout<<setw(6)<<oy;
-    oy+=(scale*3);
+  cout<<setw(xw+3)<<ox;
+  ox+=(scale*3);
+  for(int i=0;i<(size-1)/3+(size-1)%3!=0?1:0;i++){
+    cout<<setw(6)<<ox;
+    ox+=(scale*3);
   }
   cout<<endl;
   cout.precision(2);

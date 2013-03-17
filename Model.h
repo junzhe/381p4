@@ -3,6 +3,9 @@
 
 #include <set>
 #include "Utility.h"
+#include "Island.h"
+#include "Ship.h"
+#include "View.h"
 
 /*
 Model is part of a simplified Model-View-Controller pattern.

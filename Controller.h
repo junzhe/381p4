@@ -1,5 +1,8 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
+#include "Ship.h"
+#include "View.h"
+#include "Utility.h"
 /* Controller
 This class is responsible for controlling the Model and View according to interactions
 with the user.

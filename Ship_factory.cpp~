@@ -1,7 +1,9 @@
 #include "Ship_factory.h"
-#include <map>
 #include <string>
-using std::map;
+#include "Cruiser.h"
+#include "Ship.h"
+#include "Tanker.h"
+#include "Utility.h"
 using std::string;
 
 Ship * create_ship(const std::string& name, const std::string& type, Point initial_position){

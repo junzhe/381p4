@@ -3,6 +3,7 @@
 #include "Cruiser.h"
 #include "Ship.h"
 #include "Tanker.h"
+#include "Warship.h"
 #include "Utility.h"
 using std::string;
 

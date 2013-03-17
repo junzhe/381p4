@@ -1,5 +1,7 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
+#include "Ship.h"
+#include "View.h"
 /* Controller
 This class is responsible for controlling the Model and View according to interactions
 with the user.
@@ -21,16 +23,16 @@ public:
 	void run();
 private:
   View* view_ptr;
-  void command_ship_course(const string& ship_name);
-  void command_ship_position(const string& ship_name);
-  void command_ship_destination(const string& ship_name);
-  void command_ship_load_at(const string& ship_name);
+  void command_ship_course(Ship* ship_ptr);
+  void command_ship_position(Ship* ship_ptr);
+  void command_ship_destination(Ship* ship_ptr);
+  void command_ship_load_at(Ship* ship_ptr);
   void command_ship_unload_at(Ship* ship_ptr);
-  void command_ship_dock_at(const string& ship_name);
-  void command_ship_attack(const string& ship_name);
-  void command_ship_refuel(const string& ship_name);
-  void command_ship_stop(const string& ship_name);
-  void command_ship_stop_attack(const string& ship_name);
+  void command_ship_dock_at(Ship* ship_ptr);
+  void command_ship_attack(Ship* ship_ptr);
+  void command_ship_refuel(Ship* ship_ptr);
+  void command_ship_stop(Ship* ship_ptr);
+  void command_ship_stop_attack(Ship* ship_ptr);
   void command_view_default();
   void command_view_size();
   void command_view_zoom();

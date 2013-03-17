@@ -4,6 +4,7 @@
 #include "Utility.h"
 #include "Island.h"
 #include "Navigation.h"
+#include "Model.h"
 #include <iostream>
 using namespace std;
 /*
@@ -88,15 +89,17 @@ Ship::Ship(const std::string& name_, Point position_, double fuel_capacity_,
   :Sim_object(name_),
    Track_base(position_),
    fuel_capacity(fuel_capacity_),
+   fuel(fuel_capacity_),
    maximum_speed(maximum_speed_),
    fuel_consumption(fuel_consumption_),
-   resistance(resistance_)
+   resistance(resistance_),
+   ship_state(STOPPED)
 {
   cout << "Ship " << Sim_object::get_name()<< " constructed" << endl;
 }
 
 bool Ship::can_move() const{
-  return ship_state!=DEAD_IN_THE_WATER||(ship_state!=SINKING&&ship_state!=SUNK&&ship_state!=ON_THE_BOTTOM);
+  return is_afloat()&&(ship_state!=DEAD_IN_THE_WATER);
 }
 
 bool Ship::is_moving() const{
@@ -108,7 +111,7 @@ bool Ship::is_docked() const{
 }
 
 bool Ship::is_afloat() const{
-  return ship_state==DOCKED||ship_state==STOPPED||ship_state==MOVING_TO_POSITION||ship_state==MOVING_ON_COURSE;
+  return ship_state==DOCKED||ship_state==STOPPED||ship_state==MOVING_TO_POSITION||ship_state==MOVING_ON_COURSE||ship_state == DEAD_IN_THE_WATER;
 }
 
 bool Ship::is_on_the_bottom() const{
@@ -137,7 +140,7 @@ void Ship::update(){
 	  cout << get_name()<< " stopped at " << get_position()<< endl;
 	  break;
 	case DOCKED:
-	  cout << get_name() << " docked at " << get_location() << endl;
+	  cout << get_name() << " docked at " << island_docked->get_name() << endl;
 	  break;
 	case DEAD_IN_THE_WATER:
 	  cout << get_name() << " dead in the water at " << get_position()<< endl;
@@ -153,15 +156,15 @@ void Ship::update(){
       switch(ship_state){
 	case SINKING:
 	  ship_state = SUNK;
-	  cout<<get_name()<<"sunk"<<endl;
+	  cout<<get_name()<<" sunk"<<endl;
 	  g_Model_ptr->notify_location(get_name(), get_location());
 	  break;
 	case SUNK:
 	  ship_state = ON_THE_BOTTOM;
-	  cout<<get_name()<<"on the bottom"<<endl;
+	  cout<<get_name()<<" on the bottom"<<endl;
 	  break;
 	case ON_THE_BOTTOM:
-	  cout<<get_name()<<"on the bottom"<<endl;
+	  cout<<get_name()<<" on the bottom"<<endl;
 	  break;
       }
       return;
@@ -174,16 +177,16 @@ void Ship::describe() const{
     cout << ", fuel: " << fuel << " tons" << ", resistance: " << resistance << endl;
     switch(ship_state){
       case MOVING_TO_POSITION:
-	cout << "Moving to " << destination << " on " << get_course() << endl;
+	cout << "Moving to " << destination << " on " << get_course_speed() << endl;
 	break;
       case MOVING_ON_COURSE:
-	cout << "Moving on " << get_course() << endl;
+	cout << "Moving on " << get_course_speed() << endl;
 	break;
       case STOPPED:
 	cout << "Stopped" << endl;
 	break;
       case DOCKED:
-	cout << "Docked at " << get_position()<< endl;
+	cout << "Docked at " << island_docked->get_name()<< endl;
 	break;
       case DEAD_IN_THE_WATER:
 	cout << "Dead in the water" << endl;
@@ -223,10 +226,11 @@ void Ship::set_destination_position_and_speed(Point destination_position, double
   Point cur = get_position();
   Compass_vector cv(cur, destination);
   
-  set_speed(speed);
-  set_course(cv.direction);
+  Course_speed cs(cv.direction, speed);
+  set_course_speed(cs);
   ship_state = MOVING_TO_POSITION;
-  cout << get_name() << " will sail on " << get_course() << " to " << destination<< endl;
+  
+  cout << get_name() << " will sail on " << get_course_speed() << " to " << destination<< endl;
   return;
 }
 
@@ -239,11 +243,11 @@ void Ship::set_course_and_speed(double course, double speed){
     throw Error("Ship cannot go that fast!");
   }
   
-  set_course(course);
-  set_speed(speed);
+  Course_speed cs(course, speed);
+  set_course_speed(cs);
   
   ship_state = MOVING_ON_COURSE;
-  cout << get_name() << " will sail on " << get_course() << endl;
+  cout << get_name() << " will sail on " << get_course_speed() << endl;
   
   return;
 }
@@ -271,7 +275,7 @@ void Ship::dock(Island * island_ptr){
   ship_state = DOCKED;
   set_position(island_ptr->get_location());
   island_docked = island_ptr;
-  cout<<get_name()<< " docked at " << get_position()<< endl;
+  cout<<get_name()<< " docked at " << island_ptr->get_name()<< endl;
   return;
 }
 

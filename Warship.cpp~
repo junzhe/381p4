@@ -1,5 +1,5 @@
 #include "Warship.h"
-#include "Ship.cpp"
+#include "Ship.h"
 #include "Utility.h"
 #include <iostream>
 using std::cout;
@@ -11,6 +11,7 @@ Warship::Warship(const std::string& name_, Point position_, double fuel_capacity
 :Ship(name_, position_, fuel_capacity_, maximum_speed_, fuel_consumption_factor_, resistance_),
 firepower(firepower_),
 maximum_range(maximum_range_),
+warship_state(NOT_ATTACKING),
 target_ptr(nullptr)
 {
   cout << "Warship " << get_name() << " constructed" << endl;
@@ -74,7 +75,7 @@ void Warship::fire_at_target(){
 }
 
 bool Warship::target_in_range() const{
-  Point cur_point = get_position();
+  Point cur_point = get_location();
   Point target_point = target_ptr->get_location();
   double distance = cartesian_distance(cur_point, target_point);
   return distance<=maximum_range;

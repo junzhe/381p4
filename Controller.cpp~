@@ -1,15 +1,19 @@
 #include "Controller.h"
 #include "View.h"
 #include "Ship_factory.h"
+#include "Ship.h"
+#include "Utility.h"
+#include "Model.h"
 #include <iostream>
+#include <functional>
 #include <string>
 #include <map>
 using namespace std;
 
 Controller::Controller(){
+  cout << "Controller constructed" << endl;
   view_ptr = new View();
   g_Model_ptr->attach(view_ptr);
-  cout << "Controller constructed" << endl;
 }
 
 Controller::~Controller(){
@@ -24,7 +28,26 @@ void Controller::error_handler(const Error& error) const{
 }
 
 void Controller::run(){
-  map<string, void (*)()> func_map;
+  map<string, void (Controller::*)()> func_map;
+  map<string, void (Controller::*)(Ship*)> func_ship_map;
+  func_map["default"] = &Controller::command_view_default;
+  func_map["size"] = &Controller::command_view_size;
+  func_map["zoom"] = &Controller::command_view_zoom;
+  func_map["pan"] = &Controller::command_view_pan;
+  func_map["show"] = &Controller::command_view_show;
+  func_map["status"] = &Controller::command_model_status;
+  func_map["go"] = &Controller::command_model_go;
+  func_map["create"] = &Controller::command_model_create;
+  func_ship_map["course"] = &Controller::command_ship_course;
+  func_ship_map["position"] = &Controller::command_ship_position;
+  func_ship_map["destination"] = &Controller::command_ship_destination;
+  func_ship_map["load_at"] = &Controller::command_ship_load_at;
+  func_ship_map["unload_at"] = &Controller::command_ship_unload_at;
+  func_ship_map["dock_at"] = &Controller::command_ship_dock_at;
+  func_ship_map["attack"] = &Controller::command_ship_attack;
+  func_ship_map["refuel"] = &Controller::command_ship_refuel;
+  func_ship_map["stop"] = &Controller::command_ship_stop;
+  func_ship_map["stop_attack"] = &Controller::command_ship_stop_attack;
   
   while(true){
     cout << "\nTime " << g_Model_ptr->get_time() << ": Enter command: ";
@@ -41,17 +64,17 @@ void Controller::run(){
       
       if(g_Model_ptr->is_ship_present(command)){
 	string second_command;
-	cin<<second_command;
-	Ship* ship_ptr = g_Model_ptr->get_ship_ptr(second_command);
-	if(func_map.find(command)==func_map.end()){
+	cin>>second_command;
+	Ship* ship_ptr = g_Model_ptr->get_ship_ptr(command);
+	if(func_ship_map.find(second_command)==func_ship_map.end()){
 	  throw Error("Unrecognized command!");
 	}
-	func_map[second_command](ship_ptr);
+	(this->*(func_ship_map[second_command]))(ship_ptr);
 	continue;
       }
 
       if(func_map.find(command)!=func_map.end()){
-	func_map[command]();
+	(this->*(func_map[command]))();
 	continue;
       }else{
 	throw Error("Unrecognized command!");
@@ -105,7 +128,7 @@ void Controller::command_ship_position(Ship* ship_ptr){
     throw Error("Negative speed entered!");
   }
   
-  ship_ptr->set_destination_position_and_speed(Position(x,y), speed);
+  ship_ptr->set_destination_position_and_speed(Point(x,y), speed);
   return;
 }
 
@@ -126,7 +149,7 @@ void Controller::command_ship_destination(Ship* ship_ptr){
   return;
 }
 
-void Ship::command_ship_load_at(Ship* ship_ptr){
+void Controller::command_ship_load_at(Ship* ship_ptr){
   string island_name;
   if(!(cin>>island_name)){
     throw Error("Unrecognized command!");
@@ -226,18 +249,22 @@ void Controller::command_model_go(){
 }
 
 void Controller::command_model_create(){
-  string ship_name;
+  string ship_name, type_name;
   double x,y;
   if(!(cin>>ship_name)){
     throw Error("Unrecognized command!");
   }
   
-  if(ship_name.size()<=2){
+  if(ship_name.size()<2){
     throw Error("Name is too short!");
   }
   
+  if(!(cin>>type_name)){
+    throw Error("Unrecognized command!");
+  }
+  
   if(g_Model_ptr->is_ship_present(ship_name)){
-    throw Error("Name is already in use!") 
+    throw Error("Name is already in use!");
   }
  
   if(!(cin>>x)){
@@ -248,7 +275,7 @@ void Controller::command_model_create(){
     throw Error("Expected a double!");
   }
   
-  Ship* ship_ptr = create_ship(ship_name, Point(x,y));
+  Ship* ship_ptr = create_ship(ship_name, type_name, Point(x,y));
   
   g_Model_ptr->add_ship(ship_ptr);
   return;

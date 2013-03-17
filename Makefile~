@@ -1,0 +1,1 @@
+g++ -o p4exe -std=c++11 -g p4_main.cpp Tanker.cpp Ship_factory.cpp Track_base.cpp Navigation.cpp Geometry.cpp Utility.cpp Island.cpp Cruiser.cpp Warship.cpp Ship.cpp View.cpp Model.cpp Controller.cpp

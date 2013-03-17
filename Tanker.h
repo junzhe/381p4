@@ -48,8 +48,12 @@ public:
 	void update() override;
 	void describe() const override;
 private:
+  
+  void load_unload_cycle();
+  
   Tanker_state tanker_state;
-  Island* island;
+  Island* island_load;
+  Island* island_unload;
   double cargo_capacity;
   double cargo;
 };
