@@ -104,33 +104,36 @@ public:
 	virtual void receive_hit(int hit_force, Ship* attacker_ptr);
 		
 protected:
-	// future projects may need additional protected members
-	double fuel_capacity;
-	int resistance;
+	int resistance;				// Current resistance
+	double fuel_capacity;			//fuel capacity
+	
+	//return the ship speed
 	Ship_state get_ship_state() const {return ship_state;}
+	//set the ship speed
 	void set_ship_state(Ship_state ship_state_){ship_state = ship_state_;}
+	
+	//return the maximum speed
 	double get_maximum_speed() const;
+	
 	// return pointer to the Island currently docked at, or nullptr if not docked
 	Island* get_docked_Island() const;
 
 private:
 	double fuel;						// Current amount of fuel
+	double maximum_speed;				// Maximum speed
 	double fuel_consumption;			// tons/nm required
 	Point destination;					// Current destination if any
-        double maximum_speed;
-	Island* island_docked;
-	Ship_state ship_state;
+	Island* island_docked;				//island ship dock
+	Ship_state ship_state;				// shop state
 		
 	// Updates position, fuel, and movement_state, assuming 1 time unit (1 hr)
 	void calculate_movement();
 
+	// disallow copy/move, construction or assignment
 	Ship(const Ship&) = delete;
 	Ship(Ship&&) = delete;
 	Ship& operator=(const Ship&) = delete;
 	Ship& operator=(Ship&&) = delete;
-
-
-	// disallow copy/move, construction or assignment
 };
 
 #endif

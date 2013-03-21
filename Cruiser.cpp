@@ -35,6 +35,8 @@ void Cruiser::describe() const{
 
 void Cruiser::receive_hit(int hit_force, Ship* attacker_ptr){
   Ship::receive_hit(hit_force, attacker_ptr);
+  
+  //If not attacking then start attack
   if(warship_state==NOT_ATTACKING){
     Warship::attack(attacker_ptr);
   }

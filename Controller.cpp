@@ -28,8 +28,9 @@ void Controller::error_handler(const Error& error) const{
 }
 
 void Controller::run(){
-  map<string, void (Controller::*)()> func_map;
-  map<string, void (Controller::*)(Ship*)> func_ship_map;
+  map<string, void (Controller::*)()> func_map;	// map of member func pointer
+  map<string, void (Controller::*)(Ship*)> func_ship_map;	//map of member func pointer
+  
   func_map["default"] = &Controller::command_view_default;
   func_map["size"] = &Controller::command_view_size;
   func_map["zoom"] = &Controller::command_view_zoom;
@@ -55,6 +56,7 @@ void Controller::run(){
     cin>>command;
     
     try {
+      //Is it quit
       if(command.compare("quit")==0){
 	g_Model_ptr->detach(view_ptr);
 	delete view_ptr;
@@ -62,6 +64,7 @@ void Controller::run(){
 	return;
       }
       
+      //Is is a ship command
       if(g_Model_ptr->is_ship_present(command)){
 	string second_command;
 	cin>>second_command;
@@ -73,6 +76,7 @@ void Controller::run(){
 	continue;
       }
 
+      //Is it a valid command
       if(func_map.find(command)!=func_map.end()){
 	(this->*(func_map[command]))();
 	continue;
@@ -87,16 +91,10 @@ void Controller::run(){
 }
 
 void Controller::command_ship_course(Ship* ship_ptr){
-  double heading;
-  double speed;
+  double heading, speed;
   
-  if(!(cin>>heading)){
-    throw Error("Expected a double!");
-  }
-  
-  if(!(cin>>speed)){
-    throw Error("Expected a double!");
-  }
+  heading = read_double();
+  speed = read_double();
 
   if(heading<0.0||heading>=360.0){
     throw Error("Invalid heading entered!");
@@ -112,17 +110,9 @@ void Controller::command_ship_course(Ship* ship_ptr){
 
 void Controller::command_ship_position(Ship* ship_ptr){
   double x,y, speed;
-  if(!(cin>>x)){
-    throw Error("Expected a double!");
-  }
-  
-  if(!(cin>>y)){
-    throw Error("Expected a double!");
-  }
-  
-  if(!(cin>>speed)){
-    throw Error("Expected a double!");
-  }
+  x = read_double();
+  y = read_double();
+  speed = read_double();
 
   if(speed<0.0){
     throw Error("Negative speed entered!");
@@ -135,13 +125,9 @@ void Controller::command_ship_position(Ship* ship_ptr){
 void Controller::command_ship_destination(Ship* ship_ptr){
   string island_name;
   double speed;
-  if(!(cin>>island_name)){
-    throw Error("Unrecognized command!");
-  }
   
-  if(!(cin>>speed)){
-    throw Error("Expected a double!");
-  }
+  island_name = read_string();
+  speed = read_double();
   
   Island* island_ptr = g_Model_ptr->get_island_ptr(island_name);
   
@@ -150,10 +136,8 @@ void Controller::command_ship_destination(Ship* ship_ptr){
 }
 
 void Controller::command_ship_load_at(Ship* ship_ptr){
-  string island_name;
-  if(!(cin>>island_name)){
-    throw Error("Unrecognized command!");
-  }
+  string island_name = read_string();
+  
   Island* island_ptr = g_Model_ptr->get_island_ptr(island_name);
   ship_ptr->set_load_destination(island_ptr);
   return;
@@ -161,30 +145,23 @@ void Controller::command_ship_load_at(Ship* ship_ptr){
 
 
 void Controller::command_ship_unload_at(Ship* ship_ptr){
-  string island_name;
-  if(!(cin>>island_name)){
-    throw Error("Unrecognized command!");
-  }
+  string island_name = read_string();
   Island* island_ptr = g_Model_ptr->get_island_ptr(island_name);
   ship_ptr->set_unload_destination(island_ptr);
   return;
 }
 
 void Controller::command_ship_dock_at(Ship* ship_ptr){
-  string island_name;
-  if(!(cin>>island_name)){
-    throw Error("Unrecognized command!");
-  }
+  string island_name = read_string();
+  
   Island* island_ptr = g_Model_ptr->get_island_ptr(island_name);
   ship_ptr->dock(island_ptr);
   return;
 }
 
 void Controller::command_ship_attack(Ship* ship_ptr){
-  string ship_name;
-  if(!(cin>>ship_name)){
-    throw Error("Unrecognized command!");
-  }
+  string ship_name = read_string();
+  
   Ship* ship_ptr_target = g_Model_ptr->get_ship_ptr(ship_name);
   ship_ptr->attack(ship_ptr_target);
   return;
@@ -207,32 +184,23 @@ void Controller::command_view_default(){
 }
 
 void Controller::command_view_size(){
-  int size;
-  if(!(cin>>size)){
-    throw Error("Expected an integer!");
-  }
+  int size = read_int();
+  
   view_ptr->set_size(size);
 }
 
 void Controller::command_view_zoom(){
   double scale;
-  if(!(cin>>scale)){
-    throw Error("Expected a double!");
-  }
+  scale = read_double();
   
   view_ptr->set_scale(scale);
 }
 
 void Controller::command_view_pan(){
   double x,y;
-  if(!(cin>>x)){
-    throw Error("Expected a double!");
-  }
-  
-  if(!(cin>>y)){
-    throw Error("Expected a double!");
-  }
-  
+  x =read_double();
+  y = read_double();
+
   view_ptr->set_origin(Point(x,y));
 }
 
@@ -251,32 +219,51 @@ void Controller::command_model_go(){
 void Controller::command_model_create(){
   string ship_name, type_name;
   double x,y;
-  if(!(cin>>ship_name)){
-    throw Error("Unrecognized command!");
-  }
+  
+  ship_name = read_string();
   
   if(ship_name.size()<2){
     throw Error("Name is too short!");
   }
   
-  if(!(cin>>type_name)){
-    throw Error("Unrecognized command!");
-  }
+  type_name = read_string();
   
   if(g_Model_ptr->is_name_in_use(ship_name)){
     throw Error("Name is already in use!");
   }
- 
-  if(!(cin>>x)){
-    throw Error("Expected a double!");
-  }
   
-  if(!(cin>>y)){
-    throw Error("Expected a double!");
-  }
+  x = read_double();
+  y = read_double();
   
   Ship* ship_ptr = create_ship(ship_name, type_name, Point(x,y));
   
   g_Model_ptr->add_ship(ship_ptr);
   return;
+}
+
+int Controller::read_int(){
+  int result;
+  if(!(cin>>result)){
+    throw Error("Expected an integer!");
+  }
+
+  return result;
+}
+
+double Controller::read_double(){
+  double result;
+  
+  if(!(cin>>result)){
+    throw Error("Expected a double!");
+  }
+  
+  return result;
+}
+
+string Controller::read_string(){
+  string result;
+  if(!(cin>>result)){
+    throw Error("Unrecognized command!");
+  }
+  return result;
 }

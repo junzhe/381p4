@@ -159,6 +159,7 @@ void Ship::update(){
 	case SINKING:
 	  ship_state = SUNK;
 	  cout<<get_name()<<" sunk"<<endl;
+	  //remove sunk ship
 	  g_Model_ptr->notify_gone(get_name());
 	  break;
 	case SUNK:
@@ -232,6 +233,7 @@ void Ship::set_destination_position_and_speed(Point destination_position, double
   
   destination = destination_position;
   Point cur = get_position();
+  //use Compass vector to compute direction
   Compass_vector cv(cur, destination);
   
   Course_speed cs(cv.direction, speed);
@@ -292,10 +294,12 @@ void Ship::refuel(){
     throw Error("Must be docked!");
   }
   double required_fuel = fuel_capacity - fuel;
+  
   if(required_fuel<0.005){
     fuel = fuel_capacity;
     return;
   }else{
+    //get refuel
     double fuel_get = island_docked->provide_fuel(required_fuel);
     fuel+=fuel_get;
     cout << get_name() << " now has " << fuel << " tons of fuel" << endl;

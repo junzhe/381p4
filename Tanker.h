@@ -48,14 +48,14 @@ public:
 	void update() override;
 	void describe() const override;
 private:
-  
+  //The update part in set_load/unload_destination
   void load_unload_cycle();
   
-  Tanker_state tanker_state;
-  Island* island_load;
-  Island* island_unload;
-  double cargo_capacity;
-  double cargo;
+  Tanker_state tanker_state;		//Tanker state
+  Island* island_load;			//pointer of island to load
+  Island* island_unload;		//pointer of island to unload
+  double cargo_capacity;		//cargo capacity
+  double cargo;				//amount of cargo
 };
 
 #endif

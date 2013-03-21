@@ -40,8 +40,7 @@ public:
 	void describe() const override;
 
 protected:
-	// future projects may need additional protected members
-	Warship_state warship_state;
+	Warship_state warship_state;		//
 	int firepower;
 	double maximum_range;
 	Ship* target_ptr;

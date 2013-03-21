@@ -40,11 +40,10 @@ public:
 	void describe() const override;
 
 protected:
-	// future projects may need additional protected members
-	Warship_state warship_state;
-	int firepower;
-	double maximum_range;
-	Ship* target_ptr;
+	Warship_state warship_state;		//warship state
+	int firepower;				//Current firepower
+	double maximum_range;			//maximum range
+	Ship* target_ptr;			//pointer of attacking target
 	// return true if this Warship is in the attacking state
 	bool is_attacking() const;
 	

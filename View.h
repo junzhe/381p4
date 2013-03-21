@@ -69,8 +69,7 @@ private:
 	int size;			// current size of the display
 	double scale;		// distance per cell of the display
 	Point origin;		// coordinates of the lower-left-hand corner
-	matrix_display matrix;
-	point_map map;
+	point_map map;		// map of attached point
 				
 	// Calculate the cell subscripts corresponding to the location parameter, using the 
 	// current size, scale, and origin of the display. 

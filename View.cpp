@@ -86,15 +86,19 @@ void View::set_defaults(){
 }
 
 void View::draw(){
+  matrix_display matrix;
   matrix.assign(size, vector<string>(size, ". "));
-  vector<pair<string, Point>> out_of_map_points;
+  
+  vector<pair<string, Point>> out_of_map_points;	//container for sunk ship
   for(auto it = map.begin(); it!=map.end(); it++){
     int x= 0,y= 0;
     if(get_subscripts(x,y,(*it).second)){
       if(matrix[y][x][0]=='.'&&matrix[y][x][1]==' '){
+	// rewrite the map
 	matrix[y][x][0] = (*it).first[0];
 	matrix[y][x][1] = (*it).first[1];
       }else{
+	// duplicate point
 	matrix[y][x][0] = '*';
 	matrix[y][x][1] = ' ';
       }
@@ -102,8 +106,8 @@ void View::draw(){
       out_of_map_points.push_back((*it));
     }
   }
+  
   int xw = 0;
-  int yw = 0;
   double ox = origin.x;
   double oy = origin.y;
   double upperx = origin.x+scale*((size-1)/3)*3;
@@ -114,12 +118,14 @@ void View::draw(){
   supperx<<upperx;
   suppery<<uppery;
   
+  //get the x number width
   xw = sox.str().size()>supperx.str().size()?sox.str().size():supperx.str().size();
  
   cout<<"Display size: "<<size<<", scale: "<<scale<<", origin: ("<<ox<<", "<<oy<<")"<<endl;
   
+  //print the out of map point
   if(!out_of_map_points.empty()){
-    for(int i=0;i<out_of_map_points.size()-1;i++){
+    for(int i=0;i<(int)(out_of_map_points.size()-1);i++){
       cout<<out_of_map_points[i].first<<", ";
     }
     cout<<out_of_map_points[out_of_map_points.size()-1].first<<" outside the map"<<endl;
@@ -127,6 +133,7 @@ void View::draw(){
   
   cout.precision(0);
   
+  //print the map
   for(int i=size-1;i>=0;i--){
     cout<<" "<<setw(xw);
     if(i%3==0){
@@ -143,6 +150,7 @@ void View::draw(){
   }
   cout<<setw(xw+3)<<ox;
   ox+=(scale*3);
+  //print the y xile
   for(int i=0;i<(size-1)/3;i++){
     cout<<setw(6)<<ox;
     ox+=(scale*3);

@@ -23,7 +23,7 @@ public:
 
 	void update() override;
 	void describe() const override;
-    void receive_hit(int hit_force, Ship* attacker_ptr) override;
+	void receive_hit(int hit_force, Ship* attacker_ptr) override;
 };
 
 #endif

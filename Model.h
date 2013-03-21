@@ -83,10 +83,10 @@ public:
 private:
 	int time;		// the simulated time
 	
-	set<Sim_object*, Sim_object_Compare> sim_object_set;
-	set<Island*, Sim_object_Compare> island_set;
-	set<Ship*, Sim_object_Compare> ship_set;
-	set<View*> view_set;
+	set<Sim_object*, Sim_object_Compare> sim_object_set;		//container of Sim_object
+	set<Island*, Sim_object_Compare> island_set;			//container of island
+	set<Ship*, Sim_object_Compare> ship_set;			//container of ship
+	set<View*> view_set;						//container of view
 	
 	// disallow copy/move construction or assignment
 	Model(const Model&) = delete;

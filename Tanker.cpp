@@ -156,6 +156,7 @@ void Tanker::update(){
       double required_cargo = cargo_capacity-cargo;
       if(required_cargo<0.005){
 	cargo = cargo_capacity;
+	//set unload destination
 	Ship::set_destination_position_and_speed(island_unload->get_location(), get_maximum_speed());
 	tanker_state = MOVING_TO_UNLOADING;
       }else{
@@ -167,6 +168,7 @@ void Tanker::update(){
     }
     case UNLOADING:{
       if(cargo==0.0){
+	//set load destination
 	Ship::set_destination_position_and_speed(island_load->get_location(), get_maximum_speed());
 	tanker_state = MOVING_TO_LOADING;
       }else{
