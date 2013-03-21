@@ -88,11 +88,11 @@ Ship::Ship(const std::string& name_, Point position_, double fuel_capacity_,
 		double maximum_speed_, double fuel_consumption_, int resistance_)
   :Sim_object(name_),
    Track_base(position_),
+   resistance(resistance_),
    fuel_capacity(fuel_capacity_),
    fuel(fuel_capacity_),
    maximum_speed(maximum_speed_),
    fuel_consumption(fuel_consumption_),
-   resistance(resistance_),
    ship_state(STOPPED)
 {
   cout << "Ship " << Sim_object::get_name()<< " constructed" << endl;
@@ -145,6 +145,8 @@ void Ship::update(){
 	case DEAD_IN_THE_WATER:
 	  cout << get_name() << " dead in the water at " << get_position()<< endl;
 	  break;
+	default:
+	  break;
       }
       return;
     }else{
@@ -157,7 +159,7 @@ void Ship::update(){
 	case SINKING:
 	  ship_state = SUNK;
 	  cout<<get_name()<<" sunk"<<endl;
-	  g_Model_ptr->notify_location(get_name(), get_location());
+	  g_Model_ptr->notify_gone(get_name());
 	  break;
 	case SUNK:
 	  ship_state = ON_THE_BOTTOM;
@@ -165,6 +167,8 @@ void Ship::update(){
 	  break;
 	case ON_THE_BOTTOM:
 	  cout<<get_name()<<" on the bottom"<<endl;
+	  break;
+	default:
 	  break;
       }
       return;
@@ -191,6 +195,8 @@ void Ship::describe() const{
       case DEAD_IN_THE_WATER:
 	cout << "Dead in the water" << endl;
 	break;
+      default:
+	break;
     }
   }else{
     switch(ship_state){
@@ -202,6 +208,8 @@ void Ship::describe() const{
 	break;
       case ON_THE_BOTTOM:
 	cout << " on the bottom" << endl;
+	break;
+      default:
 	break;
     }
   }

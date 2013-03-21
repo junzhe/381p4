@@ -21,6 +21,13 @@ struct Sim_object_Compare{
   }
 };
 
+struct Sim_object_Name_Compare_with_string{
+  bool operator() (const Sim_object* o, const string& s){
+    string name = o->get_name();
+    return name[0]==s[0]&&name[1]==s[1];
+  }
+};
+
 struct Sim_object_Compare_with_string{
   bool operator() (const Sim_object* o, const string& s){
     return o->get_name().compare(s)==0;

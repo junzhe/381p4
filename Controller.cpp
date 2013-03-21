@@ -263,7 +263,7 @@ void Controller::command_model_create(){
     throw Error("Unrecognized command!");
   }
   
-  if(g_Model_ptr->is_ship_present(ship_name)){
+  if(g_Model_ptr->is_name_in_use(ship_name)){
     throw Error("Name is already in use!");
   }
  

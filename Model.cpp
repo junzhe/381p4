@@ -42,7 +42,7 @@ Model::~Model(){
 }
 
 bool Model::is_name_in_use(const std::string& name) const{
-  return find_if(sim_object_set.begin(), sim_object_set.end(), bind(Sim_object_Compare_with_string(),_1, name))!=sim_object_set.end();
+  return find_if(sim_object_set.begin(), sim_object_set.end(), bind(Sim_object_Name_Compare_with_string(),_1, name))!=sim_object_set.end();
 }
 
 

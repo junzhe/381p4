@@ -6,6 +6,7 @@
 #include "Island.h"
 #include "Ship.h"
 #include "View.h"
+using std::set;
 
 /*
 Model is part of a simplified Model-View-Controller pattern.

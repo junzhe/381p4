@@ -8,7 +8,7 @@
 using std::map;
 using std::string;
 using std::vector;
-using std::set;
+
 /* *** View class ***
 The View class encapsulates the data and functions needed to generate the map
 display, and control its properties. It has a "memory" for the names and locations

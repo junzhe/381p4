@@ -22,13 +22,7 @@ Model constructed
 Controller constructed
 View constructed
 
-Time 0: Enter command: Ajax
-Bermuda
-Exxon
-Shell
-Valdez
-Xerxes
-Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Time 0: Enter command: Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
   38 . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -81,14 +75,7 @@ Island Shell now has 1200.00 tons
 Valdez now at (22.93, 22.93)
 Xerxes now at (5.00, 25.00)
 
-Time 1: Enter command: Ajax
-Bermuda
-Exxon
-Oil_City
-Shell
-Valdez
-Xerxes
-Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Time 1: Enter command: Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
   38 . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -130,14 +117,8 @@ Island Shell now has 1400.00 tons
 Valdez now at (15.86, 15.86)
 Xerxes now at (-15.00, 25.00)
 
-Time 2: Enter command: Ajax
-Bermuda
-Exxon
-Oil_City
-Shell
-Valdez
-Xerxes
-Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Time 2: Enter command: Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Xerxes outside the map
   38 . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -175,14 +156,8 @@ Valdez now at (10.00, 10.00)
 Valdez docked at Exxon
 Xerxes now at (-35.00, 25.00)
 
-Time 3: Enter command: Ajax
-Bermuda
-Exxon
-Oil_City
-Shell
-Valdez
-Xerxes
-Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Time 3: Enter command: Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Xerxes outside the map
   38 . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -240,14 +215,7 @@ Valdez docked at Exxon
 Valdez will sail on course 45.00 deg, speed 10.00 nm/hr to (20.00, 20.00)
 Xerxes now at (-2.45, 1.75)
 
-Time 5: Enter command: Ajax
-Bermuda
-Exxon
-Oil_City
-Shell
-Valdez
-Xerxes
-Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Time 5: Enter command: Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
   38 . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -284,14 +252,7 @@ Island Shell now has 1177.64 tons
 Valdez now at (17.07, 17.07)
 Xerxes dead in the water at (-2.45, 1.75)
 
-Time 6: Enter command: Ajax
-Bermuda
-Exxon
-Oil_City
-Shell
-Valdez
-Xerxes
-Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Time 6: Enter command: Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
   38 . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -357,14 +318,7 @@ Xerxes is attacking
 Xerxes fires
 Ajax hit with 3, resistance now 0
 
-Time 8: Enter command: Ajax
-Bermuda
-Exxon
-Oil_City
-Shell
-Valdez
-Xerxes
-Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Time 8: Enter command: Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
   38 . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -420,14 +374,7 @@ Island Shell now has 1977.64 tons
 Valdez now at (12.93, 12.93)
 Xerxes sunk
 
-Time 10: Enter command: Ajax
-Bermuda
-Exxon
-Oil_City
-Shell
-Valdez
-Xerxes
-Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Time 10: Enter command: Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
   38 . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -447,7 +394,7 @@ Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
      . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
    2 . . . . . . . . . . . . . . . . . . . . . . . . . 
-     . . . Xe. . . . . . . . . . . . . . . . . . . . . 
+     . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
   -4 . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -468,13 +415,7 @@ Ship Xerxes destructed
 Track_base destructed
 Sim_object Xerxes destructed
 
-Time 11: Enter command: Ajax
-Bermuda
-Exxon
-Oil_City
-Shell
-Valdez
-Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Time 11: Enter command: Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
   38 . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -520,13 +461,8 @@ Island Shell now has 2577.64 tons
 Valdez docked at Exxon
 Valdez will sail on course 45.00 deg, speed 10.00 nm/hr to (20.00, 20.00)
 
-Time 13: Enter command: Ajax
-Bermuda
-Exxon
-Oil_City
-Shell
-Valdez
-Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Time 13: Enter command: Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Ajax outside the map
   38 . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -569,13 +505,7 @@ Oil_City now has 1000.00 of cargo
 Island Shell now has 1688.20 tons
 Valdez stopped at (10.00, 10.00)
 
-Time 14: Enter command: Ajax
-Bermuda
-Exxon
-Oil_City
-Shell
-Valdez
-Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Time 14: Enter command: Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
   38 . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -615,13 +545,7 @@ Time 15: Enter command: Ajax docked at Bermuda
 Time 15: Enter command: Island Bermuda supplied 934.46 tons of fuel
 Ajax now has 1000.00 tons of fuel
 
-Time 15: Enter command: Ajax
-Bermuda
-Exxon
-Oil_City
-Shell
-Valdez
-Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
+Time 15: Enter command: Display size: 25, scale: 2.00, origin: (-10.00, -10.00)
   38 . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 
      . . . . . . . . . . . . . . . . . . . . . . . . . 

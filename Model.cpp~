@@ -96,6 +96,7 @@ void Model::update(){
   for_each(ship_set.begin(), ship_set.end(), [&ship_remove](Ship* ship){if(ship->is_on_the_bottom()){ship_remove.push_back(ship);}});
   
   for(Ship* ship:ship_remove){
+    notify_gone(ship->get_name());
     sim_object_set.erase(ship);
     ship_set.erase(ship);
     delete ship;

@@ -2,10 +2,12 @@
 #define MODLE_H
 
 #include <set>
+#include <string>
 #include "Utility.h"
 #include "Island.h"
 #include "Ship.h"
 #include "View.h"
+using std::set;
 
 /*
 Model is part of a simplified Model-View-Controller pattern.

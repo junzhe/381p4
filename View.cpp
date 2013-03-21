@@ -106,8 +106,8 @@ void View::draw(){
   int yw = 0;
   double ox = origin.x;
   double oy = origin.y;
-  double upperx = origin.x+scale*(size-1);
-  double uppery = origin.y+scale*(size-1);
+  double upperx = origin.x+scale*((size-1)/3)*3;
+  double uppery = origin.y+scale*((size-1)/3)*3;
   stringstream sox, soy, supperx, suppery;
   sox<<ox;
   soy<<oy;
@@ -115,9 +115,16 @@ void View::draw(){
   suppery<<uppery;
   
   xw = sox.str().size()>supperx.str().size()?sox.str().size():supperx.str().size();
-  yw = soy.str().size()>suppery.str().size()?soy.str().size():suppery.str().size();
  
   cout<<"Display size: "<<size<<", scale: "<<scale<<", origin: ("<<ox<<", "<<oy<<")"<<endl;
+  
+  if(!out_of_map_points.empty()){
+    for(int i=0;i<out_of_map_points.size()-1;i++){
+      cout<<out_of_map_points[i].first<<", ";
+    }
+    cout<<out_of_map_points[out_of_map_points.size()-1].first<<" outside the map"<<endl;
+  }
+  
   cout.precision(0);
   
   for(int i=size-1;i>=0;i--){
@@ -136,7 +143,7 @@ void View::draw(){
   }
   cout<<setw(xw+3)<<ox;
   ox+=(scale*3);
-  for(int i=0;i<(size-1)/3+(size-1)%3!=0?1:0;i++){
+  for(int i=0;i<(size-1)/3;i++){
     cout<<setw(6)<<ox;
     ox+=(scale*3);
   }
